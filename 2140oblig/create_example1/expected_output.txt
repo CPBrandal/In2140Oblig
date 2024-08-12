@@ -1,0 +1,60 @@
+==50524== Memcheck, a memory error detector
+==50524== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==50524== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==50524== Command: ./create_fs_1 create_example1/master_file_table create_example1/block_allocation_table
+==50524== 
+Disk:
+00000000000000000000000000000000000000000000000000
+===================================
+= Create root dir                 =
+===================================
+/ (id 0)
+===================================
+= Create kernel file in dir root = 
+===================================
+/ (id 0)
+  kernel (id 1 size 20000b blocks 0 1 2 3 4 )
+Disk:
+11111000000000000000000000000000000000000000000000
+===================================
+= Create dir etc in dir root      =
+===================================
+/ (id 0)
+  kernel (id 1 size 20000b blocks 0 1 2 3 4 )
+  etc (id 2)
+    hosts (id 3 size 200b blocks 5 )
+===================================
+= Create usr/bin, usr/local/bin   =
+===================================
+/ (id 0)
+  kernel (id 1 size 20000b blocks 0 1 2 3 4 )
+  etc (id 2)
+    hosts (id 3 size 200b blocks 5 )
+  usr (id 4)
+    bin (id 5)
+      ls (id 8 size 14322b blocks 6 7 8 9 )
+      ps (id 9 size 13800b blocks 10 11 12 13 )
+    local (id 6)
+      bin (id 7)
+        nvcc (id 10 size 28000b blocks 14 15 16 17 18 19 20 )
+        gcc (id 11 size 12623b blocks 21 22 23 24 )
+Disk:
+11111111111111111111111110000000000000000000000000
+++++++++++++++++++++++++++++++++++++++++++++++++
++ All inodes structures have been
++ deleted. The inode info is stored in
++ create_example1/master_file_table. The allocated file blocks
++ are stored in create_example1/block_allocation_table
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+==50524== 
+==50524== HEAP SUMMARY:
+==50524==     in use at exit: 0 bytes in 0 blocks
+==50524==   total heap usage: 182 allocs, 182 frees, 254,717 bytes allocated
+==50524== 
+==50524== All heap blocks were freed -- no leaks are possible
+==50524== 
+==50524== For lists of detected and suppressed errors, rerun with: -s
+==50524== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
